@@ -2,9 +2,12 @@ from django.db import models
 from django.shortcuts import redirect
 from django.urls import reverse
 
+
+
 class Blog(models.Model):
     name = models.CharField(max_length=100)
     tagline = models.TextField()
+    image = models.ImageField(blank=True, null=True)
     
     def __str__(self):
         return self.name

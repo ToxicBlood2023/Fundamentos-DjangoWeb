@@ -1,13 +1,17 @@
 
 from django.contrib import admin
 from django.urls import path, re_path, include
-from posts.views import dummy_view
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', dummy_view, name='home'),
-    path('entries/', include('posts.urls', namespace='entries'))
+    path('', include('posts.urls', namespace='entries'))
 ]
 
 
-handler404 = 'posts.views.status_code_view'
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, documento_root=settings.STATIC_ROOT)
